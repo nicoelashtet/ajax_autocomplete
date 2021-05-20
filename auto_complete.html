@@ -1,0 +1,31 @@
+<html>
+
+<head>
+    <script src="js/jquery-3.6.0.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <script>
+        $(function () {
+            $("#tags").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "auto_complete.php",
+                        dataType: "json",
+                        type: "POST",
+                        cache: false,
+                        data: { param1: request.term },
+                        success: function (data) {
+                            response(data);
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            response(['']);
+                        } });
+                }
+            });
+        });
+    </script>
+    <div class="ui-widget">
+        <label for="tags">Tags: </label>
+        <input id="tags">
+    </div>
+    </script>
